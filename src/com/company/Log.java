@@ -12,16 +12,17 @@ public class Log {
     String sql;
     String desc;
 
-    @Override
     public boolean passengerOut(Plane plane){
         Connection conn = DatabaseConnectionManager.getDatabaseConnection();
-        sql = "INSERT INTO worklog(Personale_id, task, starttime, endtime) VALUES(?, 'Passengers Out', ?, ?)";
+        sql = "INSERT INTO FlyEventList(Planelist_idPlane, task, Status, Time) VALUES(?, ?, ?, ?)";
         try{
             PreparedStatement passOut = conn.prepareStatement(sql);
 
-            //passOut.setString(1, );
-            //passOut.setLocalTime(3, time.getStartTime());
-            //passOut.setLocalTime(4, time.getEndTime());
+            passOut.setInt(1, plane.getId());
+            passOut.setString(2, "Passengers out");
+            passOut.setString(3, "Pending");
+            //passOut....time(4, time.getTime() + plane.getSize());
+
 
 
             int insertedRows = passOut.executeUpdate();
@@ -36,10 +37,9 @@ public class Log {
     }
 
 
-    @Override
     public boolean passengersIn(Plane plane){
         Connection conn = DatabaseConnectionManager.getDatabaseConnection();
-        sql = "INSERT INTO worklog(Personale_id, task, starttime, endtime) VALUES(?, 'Passengers In', ?, ?)";
+        sql = "INSERT INTO FlyEventList(Planelist_idPlane, task, Status, Time) VALUES(?, ?, ?, ?)";
         try{
             PreparedStatement passIn = conn.prepareStatement(sql);
             desc = "All passengers for flight " + plane.id + " have boardet the flight";
@@ -58,7 +58,6 @@ public class Log {
     }
 
 
-    @Override
     public boolean bagageOff(Plane plane){
         Connection conn = DatabaseConnectionManager.getDatabaseConnection();
         sql = "INSERT INTO worklog(Personale_id, task, starttime, endtime) VALUES(?, 'Bagage Off', ?, ?)";
@@ -80,7 +79,6 @@ public class Log {
     }
 
 
-    @Override
     public boolean bagageOn(Plane plane){
         Connection conn = DatabaseConnectionManager.getDatabaseConnection();
         sql = "INSERT INTO worklog(Personale_id, task, starttime, endtime) VALUES(?, 'Bagage on', ?, ?)";
@@ -102,7 +100,6 @@ public class Log {
     }
 
 
-    @Override
     public boolean fuelOnPlane(Plane plane){
         Connection conn = DatabaseConnectionManager.getDatabaseConnection();
         sql = "INSERT INTO worklog(Personale_id, task, starttime, endtime) VALUES(?, 'Fuel on', ?, ?)";
@@ -124,7 +121,6 @@ public class Log {
     }
 
 
-    @Override
     public boolean planeCleanedLog(Plane plane){
         Connection conn = DatabaseConnectionManager.getDatabaseConnection();
         sql = "INSERT INTO worklog(Personale_id, task, starttime, endtime) VALUES(?, 'Plane cleaned', ?, ?)";
