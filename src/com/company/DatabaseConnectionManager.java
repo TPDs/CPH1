@@ -1,4 +1,4 @@
-package com.company.DB;
+package com.company;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
+
 
 public class DatabaseConnectionManager {
     private static String user;
@@ -19,7 +20,7 @@ public class DatabaseConnectionManager {
 
         Properties prop = new Properties();
         try {
-            FileInputStream propertyFile = new FileInputStream("src/main/resources/application.properties");
+            FileInputStream propertyFile = new FileInputStream("C:\\Users\\Bruger\\IdeaProjects\\CPH1\\src\\ressources\\application.properties");
             prop.load(propertyFile);
             user = prop.getProperty("db.user");
             password = prop.getProperty("db.password");
