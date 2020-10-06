@@ -42,7 +42,7 @@ public class Log {
         sql = "INSERT INTO worklog(Personale_id, task, starttime, endtime) VALUES(?, 'Passengers In', ?, ?)";
         try{
             PreparedStatement passIn = conn.prepareStatement(sql);
-            desc = "All passengers for flight " + plane.id + " have boardet the flight";
+            desc = "All passengers for flight " + plane.getId() + " have boardet the flight";
 
             passIn.setString(1, desc);
 
@@ -64,7 +64,7 @@ public class Log {
         sql = "INSERT INTO worklog(Personale_id, task, starttime, endtime) VALUES(?, 'Bagage Off', ?, ?)";
         try{
             PreparedStatement bagOff = conn.prepareStatement(sql);
-            desc = "Bagage from flight " + plane.id + " have been taken out";
+            desc = "Bagage from flight " + plane.getId() + " have been taken out";
 
             bagOff.setString(1, desc);
 
@@ -86,7 +86,7 @@ public class Log {
         sql = "INSERT INTO worklog(Personale_id, task, starttime, endtime) VALUES(?, 'Bagage on', ?, ?)";
         try{
             PreparedStatement bagOn = conn.prepareStatement(sql);
-            desc = "Bagage have been loaded on flight " + plane.id;
+            desc = "Bagage have been loaded on flight " + plane.getId();
 
             bagOn.setString(1, desc);
 
@@ -108,7 +108,7 @@ public class Log {
         sql = "INSERT INTO worklog(Personale_id, task, starttime, endtime) VALUES(?, 'Fuel on', ?, ?)";
         try{
             PreparedStatement fuelOn = conn.prepareStatement(sql);
-            desc = "Flight " + plane.id + " have been refueled";
+            desc = "Flight " + plane.getId() + " have been refueled";
 
             fuelOn.setString(1, desc);
 
@@ -124,13 +124,13 @@ public class Log {
     }
 
 
-    @Override
+    //@Override
     public boolean planeCleanedLog(Plane plane){
         Connection conn = DatabaseConnectionManager.getDatabaseConnection();
         sql = "INSERT INTO worklog(Personale_id, task, starttime, endtime) VALUES(?, 'Plane cleaned', ?, ?)";
         try {
             PreparedStatement planeClean = conn.prepareStatement(sql);
-            desc = "Plane " + plane.id + " have been cleaned";
+            desc = "Plane " + plane.getId() + " have been cleaned";
 
             planeClean.setString(1, desc);
             int insertedRows = planeClean.executeUpdate();

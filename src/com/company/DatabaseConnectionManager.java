@@ -42,5 +42,6 @@ public class DatabaseConnectionManager {
             e.printStackTrace();
         }
         return conn;
+
     }
 }
