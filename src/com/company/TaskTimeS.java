@@ -1,10 +1,10 @@
 package com.company;
 
-public class TaskTimeSmall extends TaskTime {
+public class TaskTimeS extends TaskTime {
 
-    public TaskTimeSmall(int taxiInd, int passagerUd, int baggageUd, int brændstof, int rengøring, int baggageInd,
-                         int passagerInd, int taxiUd, int taxiVenteplads, int personaleTilNabo, int personaleTilDenneTerminal,
-                         int personaleTilAndenTerminal) {
+    public TaskTimeS(int taxiInd, int passagerUd, int baggageUd, int brændstof, int rengøring, int baggageInd,
+                     int passagerInd, int taxiUd, int taxiVenteplads, int personaleTilNabo, int personaleTilDenneTerminal,
+                     int personaleTilAndenTerminal) {
         super(taxiInd, passagerUd, baggageUd, brændstof, rengøring, baggageInd, passagerInd, taxiUd, taxiVenteplads,
                 personaleTilNabo, personaleTilDenneTerminal, personaleTilAndenTerminal);
         this.setTaxiInd(12);
