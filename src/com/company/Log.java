@@ -12,7 +12,7 @@ public class Log {
     String sql;
     String desc;
 
-    @Override
+    //@Override
     public boolean passengerOut(Plane plane){
         Connection conn = DatabaseConnectionManager.getDatabaseConnection();
         sql = "INSERT INTO worklog(Personale_id, task, starttime, endtime) VALUES(?, 'Passengers Out', ?, ?)";
@@ -36,7 +36,7 @@ public class Log {
     }
 
 
-    @Override
+    //@Override
     public boolean passengersIn(Plane plane){
         Connection conn = DatabaseConnectionManager.getDatabaseConnection();
         sql = "INSERT INTO worklog(Personale_id, task, starttime, endtime) VALUES(?, 'Passengers In', ?, ?)";
@@ -58,7 +58,7 @@ public class Log {
     }
 
 
-    @Override
+    //@Override
     public boolean bagageOff(Plane plane){
         Connection conn = DatabaseConnectionManager.getDatabaseConnection();
         sql = "INSERT INTO worklog(Personale_id, task, starttime, endtime) VALUES(?, 'Bagage Off', ?, ?)";
@@ -80,7 +80,7 @@ public class Log {
     }
 
 
-    @Override
+    //@Override
     public boolean bagageOn(Plane plane){
         Connection conn = DatabaseConnectionManager.getDatabaseConnection();
         sql = "INSERT INTO worklog(Personale_id, task, starttime, endtime) VALUES(?, 'Bagage on', ?, ?)";
@@ -102,7 +102,7 @@ public class Log {
     }
 
 
-    @Override
+    //@Override
     public boolean fuelOnPlane(Plane plane){
         Connection conn = DatabaseConnectionManager.getDatabaseConnection();
         sql = "INSERT INTO worklog(Personale_id, task, starttime, endtime) VALUES(?, 'Fuel on', ?, ?)";
