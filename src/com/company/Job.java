@@ -1,6 +1,10 @@
 package com.company;
+import com.company.TaskTime.TaskTime;
+import com.company.TaskTime.TaskTimeL;
+import com.company.TaskTime.TaskTimeM;
+import com.company.TaskTime.TaskTimeS;
+
 import java.time.*;
-import java.util.Random;
 
 // vi bruger comparable interface for at override en compareTo metode.
 public class Job implements Comparable<Job>{

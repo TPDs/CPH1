@@ -1,4 +1,4 @@
-package com.company;
+package com.company.TaskTime;
 
 public class TaskTime {
     private int taxiInd, passagerUd, baggageUd, brændstof, rengøring, baggageInd,passagerInd,

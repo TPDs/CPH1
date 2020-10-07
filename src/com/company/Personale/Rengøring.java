@@ -1,4 +1,4 @@
-package com.company;
+package com.company.Personale;
 
 public class Rengøring extends Personale {
 

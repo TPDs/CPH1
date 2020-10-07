@@ -1,4 +1,4 @@
-package com.company;
+package com.company.TaskTime;
 
 public class TaskTimeS extends TaskTime {
 
