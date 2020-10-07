@@ -2,7 +2,7 @@ package com.company;
 
 public class Personale {
 
-    //I denne procedure behandles lufthavnsobjektet.
+    //I denne procedure behandles Personaleobjektet.
     /*
 
        Personale obj:
@@ -14,11 +14,12 @@ public class Personale {
        Collector til at sorterer en stack efter hvilket fly der er mest akut.
 
 
-     */
-   // Bagage objBagage       = new Bagage();
-   // Brandstof objBradstof  = new Brandstof();
-  //  Rengøring objRengøring = new Rengøring();
 
+    Bagage objBagage       = new Bagage();
+    Brandstof objBradstof  = new Brandstof();
+    Rengøring objRengøring = new Rengøring();
+    GatePassagerer objGate = new GatePassagerer();    //Passagere ud af flyet
+    */
     enum status {
         ikke_Lavet,                 //arbejdet er ikke påbegyndt
         igangMedAtBlive_Lavet,      //arbejdet er igang med at blive lavet
@@ -27,7 +28,7 @@ public class Personale {
            }
 
 
-    //public int opgave_Id;
+
     public int idpersonale;
     public String rde;
     public String Name;
