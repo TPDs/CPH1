@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class PlaneRepository {
     Connection conn = DatabaseConnectionManager.getDatabaseConnection();
 
-    public boolean addPlane(String ruteNr){
+    public boolean landplane(String ruteNr){
         Plane fly = new Plane();
 
         String sql = "INSERT INTO PlaneList(ruteNr, ICAO, location) VALUES(?, ?, ?)";

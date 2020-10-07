@@ -10,7 +10,7 @@ class PlaneRepositoryTest {
 
     @Test
     void addPlane() {
-        planeRepository.addPlane("D8 3563");
+        planeRepository.landplane("D8 3563");
     }
 
     //Modelnr. på rute D8 3563 er F100
