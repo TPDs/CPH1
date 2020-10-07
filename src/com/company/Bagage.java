@@ -2,6 +2,8 @@ package com.company;
 
 public class Bagage extends Personale {
 
+    //I denne procedure behandles arbejdet med at få bagage ud og ind i flyet.
+    //Arbejdet afhænger af hvor stort flyet er
 
     enum bagage_arbejde_ud {
         ikke_Lavet_bagage_ud,                 //arbejdet er ikke påbegyndt
