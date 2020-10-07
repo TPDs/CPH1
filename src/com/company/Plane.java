@@ -3,12 +3,15 @@ package com.company;
 public class Plane {
 
     private int id;
-    private String size;
+    private char size;
     private String ruteNr;
     private String ICAO;
     private String location;
 
-    public Plane(int id, String size, String ruteNr, String ICAO, String location) {
+    public Plane() {
+    }
+
+    public Plane(int id, char size, String ruteNr, String ICAO, String location) {
         this.id = id;
         this.size = size;
         this.ruteNr = ruteNr;
@@ -16,11 +19,22 @@ public class Plane {
         this.location = location;
     }
 
+    @Override
+    public String toString() {
+        return "Plane{" +
+                "id=" + id +
+                ", size=" + size +
+                ", ruteNr='" + ruteNr + '\'' +
+                ", ICAO='" + ICAO + '\'' +
+                ", location='" + location + '\'' +
+                '}';
+    }
+
     public int getId() {
         return id;
     }
 
-    public String getSize() {
+    public char getSize() {
         return size;
     }
 
@@ -34,5 +48,25 @@ public class Plane {
 
     public String getLocation() {
         return location;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setSize(char size) {
+        this.size = size;
+    }
+
+    public void setRuteNr(String ruteNr) {
+        this.ruteNr = ruteNr;
+    }
+
+    public void setICAO(String ICAO) {
+        this.ICAO = ICAO;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }
