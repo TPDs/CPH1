@@ -8,5 +8,6 @@ public class Main {
         System.out.println("CP1");
         DatabaseConnectionManager.getDatabaseConnection();
         Personale objPersonale = new Personale();
+
     }
 }
