@@ -8,6 +8,9 @@ public class TaskTime {
     private int personaleTilDenneTerminal = 5;
     private int personaleTilAndenTerminal= 10;
 
+    public TaskTime() {
+    }
+
     public TaskTime(int taxiInd, int passagerUd, int baggageUd, int brændstof, int rengøring, int baggageInd,
                     int passagerInd, int taxiUd, int taxiVenteplads, int personaleTilNabo, int personaleTilDenneTerminal,
                     int personaleTilAndenTerminal) {
