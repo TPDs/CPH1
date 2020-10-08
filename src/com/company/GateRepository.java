@@ -11,10 +11,10 @@ import java.util.List;
 public class GateRepository {
     Connection conn = DatabaseConnectionManager.getDatabaseConnection();
 
-    private List<Gate> gates = new ArrayList<>();
 
     public boolean readAllGates(Gate gate){
         String sql = "SELECT * FROM gate";
+        private List<Gate> gates = new ArrayList<>();
         try{
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -35,10 +35,10 @@ public class GateRepository {
         return false;
     }
 
-    public List<Gate> checkAvailable(String pSize){
-        pSize = "L";
+    public int checkAvailable(String pSize){
+        List<Gate> gates = new ArrayList<>();
+        int result = 0;
         String sql = "SELECT * FROM gate WHERE idPlane IS NULL AND size = " + pSize;
-        List<Gate> returnGate = new ArrayList<>();
         try{
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -52,12 +52,13 @@ public class GateRepository {
                 gates.add(tempGate);
             }
 
-            returnGate.add(gates.get(0));
-            gates.remove(0);
+            result = gates.get(0).getIdGate();
         }
         catch (SQLException e){
             e.printStackTrace();
         }
-        return returnGate;
+        System.out.println(result);
+        return result;
+
     }
 }
