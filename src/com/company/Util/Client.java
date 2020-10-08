@@ -25,7 +25,8 @@ public class Client {
         DataOutputStream out = new DataOutputStream(toServer);
 
         //out.writeUTF("Hello fra " + client.getLocalSocketAddress());
-        out.writeUTF("fly");
+
+        out.writeInt(1);
         InputStream inFromServer = client.getInputStream();
         DataInputStream in = new DataInputStream(inFromServer);
 
