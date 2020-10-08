@@ -9,6 +9,7 @@ public class Personale {
     //Det er ikke tilstrækkeligt specificeret hvad classen skal kunne
     //Alle kan skrive her:
 
+    
     //Foreløbig skal classen kunne:
     // skal se på pending task  ( eller en liste med arbejdsopgaver )
     // skal kunne kunne opdatere i en opgave liste.
@@ -37,6 +38,7 @@ public class Personale {
     public String role;
     public String Name;
     public int Phone;
+    public int opgaveId;
 
     //------------------------------------set-----------------------------------------------
     public void setIdpersonale(int idpersonale) {
@@ -50,6 +52,9 @@ public class Personale {
     }
     public void setPhone(int Phone) {
         this.Phone = Phone;
+    }
+    public void setOpgaveId(int opgaveId) {
+        this.opgaveId = opgaveId;
     }
     //------------------------------------get-----------------------------------------------
 
@@ -65,12 +70,8 @@ public class Personale {
     public int getPhone() {
         return Phone;
     }
+    public int getOpgaveId() {return opgaveId;}
     //----------------------------------------------------------------------------------------
-
-
-
-
-
 
 
 }
