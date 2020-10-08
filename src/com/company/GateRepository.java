@@ -14,7 +14,7 @@ public class GateRepository {
 
     public boolean readAllGates(Gate gate){
         String sql = "SELECT * FROM gate";
-        private List<Gate> gates = new ArrayList<>();
+        List<Gate> gates = new ArrayList<>();
         try{
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();

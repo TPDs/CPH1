@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Finger extends Terminal{
     Gate gate;
-    Gate.side side;
+    //Gate.side side;
 
 
     @Override

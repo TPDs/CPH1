@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MainTest {
     Gate gate;
-    Gate.side side;
+    /* Gate.side side;
 
     @Test
     void gateTest(){
@@ -23,6 +23,6 @@ class MainTest {
             gateList.add(new Gate("TestRight" + j, j, side.RIGHT));
         }
         System.out.println(gateList);
-    }
+    } */
 }
 

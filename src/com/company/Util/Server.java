@@ -50,31 +50,33 @@ public class Server  extends  Thread{
     }
 
     public void towerCommand( DataOutputStream out, DataInputStream in) throws IOException {
-        boolean flag = false;
+        boolean flag = true;
         System.out.println("Tower is live");
 
+        String test = in.readUTF();
 
-        switch (in.readUTF()){
+        while (flag) {
+            switch (test) {
 
-            case "fly":
-                System.out.println("Fly command ");
-                out.writeUTF("Fly command modtaget");
-                // call en fly method
-                break;
+                case "fly":
+                    System.out.println("Fly command ");
+                    out.writeUTF("Fly command modtaget");
+                    // call en fly method
+                    break;
 
-            case "personal":
-                System.out.println("Personal Command");
-                out.writeUTF("Personal  Command modtaget");
-                // Call en Personal command
-                break;
+                case "personal":
+                    System.out.println("Personal Command");
+                    out.writeUTF("Personal  Command modtaget");
+                    // Call en Personal command
+                    break;
 
-            case "taxi":
-                System.out.println("Taxi Command");
-                out.writeUTF("Taxi Command modtaget");
-                //Call en taxi method
-                break;
+                case "taxi":
+                    System.out.println("Taxi Command");
+                    out.writeUTF("Taxi Command modtaget");
+                    //Call en taxi method
+                    break;
+            }
         }
-
 
 
 
