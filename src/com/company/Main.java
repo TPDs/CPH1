@@ -28,7 +28,7 @@ public class Main {
                 "                                                  " + ANSI_RESET);
 
 
-        System.out.println( ANSI_YELLOW+"Tast 1 for Tårn mode ");
+        System.out.println(ANSI_YELLOW+"Tast 1 for Tårn mode ");
         System.out.println("Tast 2 for Fly mode ");
         System.out.println("Tast 3 for Personal mode " +ANSI_RESET);
 

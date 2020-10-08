@@ -23,17 +23,15 @@ public class Server  extends  Thread{
     public void run() {
         while (true){
             try {
-                System.out.println("Venter Client på port: " +
-                serverSocket.getLocalPort());
+                System.out.println("Tårn is Live on ip: " + serverSocket.getLocalPort());
                 Socket server = serverSocket.accept();
-                System.out.println(server.getRemoteSocketAddress() + " Has just connected");
                 DataInputStream in = new DataInputStream(server.getInputStream());
 
                 System.out.println(in.readUTF());
                 DataOutputStream out = new DataOutputStream(server.getOutputStream());
-                out.writeUTF("Hej Lukas!!!");
+                out.writeUTF("I hear you : " +server.getRemoteSocketAddress());
                 //out.writeUTF("Hello connected user " + server.getLocalSocketAddress());
-
+                towerCommand(out,in);
                 server.close();
 
 
@@ -47,8 +45,34 @@ public class Server  extends  Thread{
                 break;
             }
 
+        }
+
+    }
+
+    public void towerCommand( DataOutputStream out, DataInputStream in) throws IOException {
+        boolean flag = false;
+        System.out.println("Tower is live");
 
 
+        switch (in.readUTF()){
+
+            case "fly":
+                System.out.println("Fly command ");
+                out.writeUTF("Fly command modtaget");
+                // call en fly method
+                break;
+
+            case "personal":
+                System.out.println("Personal Command");
+                out.writeUTF("Personal  Command modtaget");
+                // Call en Personal command
+                break;
+
+            case "taxi":
+                System.out.println("Taxi Command");
+                out.writeUTF("Taxi Command modtaget");
+                //Call en taxi method
+                break;
         }
 
 
@@ -56,7 +80,9 @@ public class Server  extends  Thread{
 
 
 
+
     }
+
 
 
 }

@@ -7,9 +7,13 @@ public class Client {
 
 
     public void client(){
-    String serverName = "10.111.176.45"; // Dagens lokal ip på skolen.. TJEK MIG!
-
+    String serverName = "10.111.176.147"; // Dagens lokal ip på skolen.. TJEK MIG!
     int port = 48880;
+
+
+
+
+
 
     try {
         System.out.println("Connecting to " + serverName + " på port " + port);
