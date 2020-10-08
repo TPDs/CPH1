@@ -52,8 +52,8 @@ public class GateRepository {
                 gates.add(tempGate);
             }
 
-            returnGate.add(gates.get(1));
-            gates.remove(1);
+            returnGate.add(gates.get(0));
+            gates.remove(0);
         }
         catch (SQLException e){
             e.printStackTrace();
