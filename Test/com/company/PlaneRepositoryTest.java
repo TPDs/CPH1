@@ -1,16 +1,22 @@
 package com.company;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class PlaneRepositoryTest {
-    PlaneRepository planeRepository = new PlaneRepository();
-    Plane plane = new Plane(1, 'm', "D8 3563", "A345", "Runway 1" );
 
+
+    PlaneRepository planeRepository = new PlaneRepository();
+
+    //Opretter et fly på flylisten, checker at den successfuldt bliver oprettet og derefter sletter flyet igen
     @Test
-    void addPlane() {
+    void landPlane() {
         planeRepository.landplane("D8 3563");
+        assertEquals(1, planeRepository.findPlaneIdFromRutenR("D8 3563"));
+        planeRepository.deletePlane(1);
     }
 
     //Modelnr. på rute D8 3563 er F100
@@ -22,7 +28,7 @@ class PlaneRepositoryTest {
     //Size på F100 er M(medium)
     @Test
     void readSizeFromModel() {
-        assertEquals('H', planeRepository.readSizeFromModel("F100"));
+        assertEquals('M', planeRepository.readSizeFromModel("F100"));
     }
 
 

@@ -19,7 +19,6 @@ public class Plane {
         this.location = location;
     }
 
-    @Override
     public String toString() {
         return "Plane{" +
                 "id=" + id +
