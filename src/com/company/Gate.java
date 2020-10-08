@@ -13,6 +13,9 @@ public class Gate extends Finger {
     }
     private Side side;
 
+    public Gate() {
+    }
+
     public Gate(String size, int idPlane, int idFinger, int idGate, Side side) {
         this.size = size;
         this.idPlane = idPlane;
