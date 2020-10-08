@@ -10,13 +10,13 @@ public class PlaneRepository {
 
     public boolean landplane(String ruteNr){
         Plane fly = new Plane();
-
-        String sql = "INSERT INTO PlaneList(ruteNr, ICAO, location) VALUES(?, ?, ?)";
+        String modelnummer = readModelFromRuteNr(ruteNr);
+        String sql = "INSERT INTO PlaneList(idPlane, RuteListe_ruteNr, ModelListe_IATA, location) VALUES(DEFAULT, ?, ?, ?)";
         try{
             PreparedStatement ps = conn.prepareStatement(sql);
 
             ps.setString(1, ruteNr);
-            ps.setString(2, readModelFromRuteNr(ruteNr));
+            ps.setString(2, modelnummer);
             ps.setString(3, "Runway");
 
 
@@ -49,6 +49,7 @@ public class PlaneRepository {
         }
         return result;
     }
+
     //Læser en size fra databasen ud fra et modelNr
     public char readSizeFromModel(String modelNr){
         String sql = "SELECT Size FROM modelliste WHERE ICAO = ?";
@@ -67,6 +68,43 @@ public class PlaneRepository {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public int findPlaneIdFromRutenR(String ruteNr){
+        String sql = "SELECT idPlane FROM planelist WHERE  RuteListe_ruteNr = ?";
+        Plane plane = new Plane();
+        int result = 0;
+        try{
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, ruteNr);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                plane.setId(rs.getInt("idPlane"));
+            }
+            result = plane.getId();
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public boolean deletePlane(int id){
+        try {
+            String sql = "DELETE FROM planelist WHERE idPlane = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            int deletedrows = ps.executeUpdate();
+            if(deletedrows > 0){
+                System.out.println("Deletion succesful");
+                return true;
+            }
+            ps.executeUpdate();
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        return false;
     }
 
 }
