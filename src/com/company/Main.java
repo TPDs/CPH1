@@ -10,13 +10,29 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("CP1");
         DatabaseConnectionManager.getDatabaseConnection();
-        Personale objPersonale = new Personale();
 
-        System.out.println("Tast 1 for Tårn mode ");
+        final String ANSI_GREEN = "\u001B[32m";
+        final String ANSI_YELLOW = "\u001B[33m";
+        final String ANSI_RESET = "\u001B[0m";
+
+        System.out.println(ANSI_GREEN + " ________  ________         _____     \n" +
+                "|\\   ____\\|\\   __  \\       / __  \\    \n" +
+                "\\ \\  \\___|\\ \\  \\|\\  \\     |\\/_|\\  \\   \n" +
+                " \\ \\  \\    \\ \\   ____\\    \\|/ \\ \\  \\  \n" +
+                "  \\ \\  \\____\\ \\  \\___|         \\ \\  \\ \n" +
+                "   \\ \\_______\\ \\__\\             \\ \\__\\\n" +
+                "    \\|_______|\\|__|              \\|__|\n" +
+                "                                      \n" +
+                "                                      \n" +
+                "                                      " + ANSI_RESET);
+
+
+        System.out.println( ANSI_YELLOW+"Tast 1 for Tårn mode ");
         System.out.println("Tast 2 for Fly mode ");
-        System.out.println("Tast 3 for Personal mode ");
+        System.out.println("Tast 3 for Personal mode " +ANSI_RESET);
+
+
         Scanner sc = new Scanner(System.in);
 
         int pick = sc.nextInt();
