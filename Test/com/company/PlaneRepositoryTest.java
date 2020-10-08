@@ -1,7 +1,5 @@
 package com.company;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,7 +13,7 @@ class PlaneRepositoryTest {
     @Test
     void landPlane() {
         planeRepository.landplane("D8 3563");
-        assertEquals(1, planeRepository.findPlaneIdFromRutenR("D8 3563"));
+        assertEquals(1, planeRepository.findPlaneIdFromRutenNr("D8 3563"));
         planeRepository.deletePlane(1);
     }
 

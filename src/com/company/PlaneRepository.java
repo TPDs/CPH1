@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class PlaneRepository {
     Connection conn = DatabaseConnectionManager.getDatabaseConnection();
@@ -51,10 +52,10 @@ public class PlaneRepository {
     }
 
     //Læser en size fra databasen ud fra et modelNr
-    public char readSizeFromModel(String modelNr){
+    public String readSizeFromModel(String modelNr){
         String sql = "SELECT Size FROM modelliste WHERE ICAO = ?";
         Plane plane2 = new Plane();
-        char result = 0;
+        String result = null;
         try{
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, modelNr);
@@ -62,7 +63,7 @@ public class PlaneRepository {
             while(rs.next()){
                 plane2.setICAO(rs.getString("Size"));
             }
-            result = plane2.getICAO().charAt(0);
+            result = plane2.getICAO();
         }
         catch(SQLException e){
             e.printStackTrace();
@@ -70,7 +71,7 @@ public class PlaneRepository {
         return result;
     }
 
-    public int findPlaneIdFromRutenR(String ruteNr){
+    public int findPlaneIdFromRutenNr(String ruteNr){
         String sql = "SELECT idPlane FROM planelist WHERE  RuteListe_ruteNr = ?";
         Plane plane = new Plane();
         int result = 0;
@@ -110,4 +111,44 @@ public class PlaneRepository {
 
 
 
+    public ArrayList<Integer> checkWaitingPlanes(){
+        ArrayList<Integer> waitingPlanes = new ArrayList<>();
+        String sql = "SELECT * FROM planelist WHERE location = ?";
+        String planeLocation = "Waiting";
+        int result = 0;
+        try{
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, planeLocation);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                waitingPlanes.add(rs.getInt("idPlane"));
+            }
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        return waitingPlanes;
+    }
+    public int chooseFirstWaitingPlane(ArrayList<Integer> waitingplanes){
+        int result = waitingplanes.get(0);
+        return result;
+    }
+    public String readRuteNrFromId(int planeId){
+        String sql = "SELECT RuteListe_ruteNr FROM planelist WHERE  idPlane = ?";
+        Plane plane = new Plane();
+        String result = null;
+        try{
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, planeId);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                plane.setRuteNr(rs.getString("RuteListe_ruteNr"));
+            }
+            result = plane.getRuteNr();
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        return result;
+    }
 }

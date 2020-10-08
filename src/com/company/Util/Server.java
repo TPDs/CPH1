@@ -12,7 +12,7 @@ public class Server  extends  Thread{
     private ServerSocket serverSocket;
 
     public Server (int port) throws IOException {
-       String host = "10.111.176.45"; // Dagens lokal ip på skolen.. TJEK MIG!
+       String host = "10.111.176.147"; // Dagens lokal ip på skolen.. TJEK MIG!
 
         InetAddress address = InetAddress.getByName(host);
         serverSocket = new ServerSocket(port,10,address);
@@ -53,9 +53,10 @@ public class Server  extends  Thread{
         boolean flag = true;
         System.out.println("Tower is live");
 
-        String test = in.readUTF();
+
 
         while (flag) {
+            String test = in.readUTF().intern();
             switch (test) {
 
                 case "fly":

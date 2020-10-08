@@ -38,9 +38,10 @@ public class GateRepository {
     public int checkAvailable(String pSize){
         List<Gate> gates = new ArrayList<>();
         int result = 0;
-        String sql = "SELECT * FROM gate WHERE idPlane IS NULL AND size = " + pSize;
+        String sql = "SELECT * FROM gate WHERE idPlane IS NULL AND size = ?";
         try{
             PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, pSize);
             ResultSet rs = ps.executeQuery();
             Gate tempGate = new Gate();
             while(rs.next()){
@@ -57,7 +58,6 @@ public class GateRepository {
         catch (SQLException e){
             e.printStackTrace();
         }
-        System.out.println(result);
         return result;
 
     }
