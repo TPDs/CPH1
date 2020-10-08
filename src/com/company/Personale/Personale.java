@@ -1,8 +1,17 @@
 package com.company.Personale;
 
+//import com.mysql.cj.x.protobuf.MysqlxDatatypes;
+
 public class Personale {
 
     //I denne procedure behandles Personaleobjektet.
+    //Hvad skal personaleclassen kunne.  Hvad er kravet til denne classe
+    //Det er ikke tilstrækkeligt specificeret hvad classen skal kunne
+    //Alle kan skrive her:
+
+    //Foreløbig skal classen kunne:
+    // skal se på pending task  ( eller en liste med arbejdsopgaver )
+    // skal kunne kunne opdatere i en opgave liste.
     /*
 
        Personale obj:
@@ -20,17 +29,12 @@ public class Personale {
     Rengøring objRengøring = new Rengøring();
     GatePassagerer objGate = new GatePassagerer();    //Passagere ud af flyet
     */
-    enum status {
-        ikke_Lavet,                 //arbejdet er ikke påbegyndt
-        igangMedAtBlive_Lavet,      //arbejdet er igang med at blive lavet
-        færdig_lavet                //arbejdet er færdig lavet
 
-           }
-
-
+    
+    public String nytfelt;
 
     public int idpersonale;
-    public String rde;
+    public String role;
     public String Name;
     public int Phone;
 
@@ -39,7 +43,7 @@ public class Personale {
         this.idpersonale = idpersonale;
     }
     public void setRde(String rde) {
-        this.rde = rde;
+        this.role = role;
     }
     public void setName(String Name) {
         this.Name = Name;
@@ -53,7 +57,7 @@ public class Personale {
         return idpersonale;
     }
     public String getRde() {
-        return rde;
+        return role;
     }
     public String getName() {
         return Name;
