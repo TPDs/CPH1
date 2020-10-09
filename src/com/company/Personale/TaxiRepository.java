@@ -49,7 +49,7 @@ public class TaxiRepository {
                 e.printStackTrace();
             }
         }
-    public void taxiSpecificPlaneToGate(int planeId) {
+    public void taxiSpecificPlaneToFirstAvailableGate(int planeId) {
         String ruteNr = planeRepository.readRuteNrFromId(planeId);
         int gateID = gateRepository.checkAvailable(planeRepository.readSizeFromModel(planeRepository.readModelFromRuteNr(ruteNr)));
 
@@ -66,7 +66,22 @@ public class TaxiRepository {
         }
         registerGateInPlane(planeId, gateID);
     }
+    public void taxiSpecificPlaneToSpecificGate(int planeId, int gateID) {
 
+        String sql = "UPDATE gate SET idPlane = ? WHERE idGate = ?";
+
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, planeId);
+            ps.setInt(2, gateID);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        registerGateInPlane(planeId, gateID);
+    }
+    //Puts the plane's location to waiting
     public void TaxiToWaitingPosition(String ruteNr){
         String sql = "UPDATE planelist SET location = ? WHERE RuteListe_ruteNr = ?";
         try{
@@ -79,6 +94,7 @@ public class TaxiRepository {
             e.printStackTrace();
         }
     }
+    //Sets the plane to being on the runway again
     public void TaxiToRunway(int planeiD){
         String sql = "UPDATE planelist SET location = ? WHERE idPlane = ?";
         String plane = Integer.toString(planeiD);
@@ -92,6 +108,7 @@ public class TaxiRepository {
             e.printStackTrace();
         }
     }
+    //Sets the plane to "parked"
     public void TaxiToParked(int planeiD){
         String sql = "UPDATE planelist SET location = ? WHERE idPlane = ?";
         String plane = Integer.toString(planeiD);
