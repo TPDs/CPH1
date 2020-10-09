@@ -7,7 +7,7 @@ public class Gate extends Finger {
     private int idFinger;
     private int idGate;
 
-    private enum Side{
+    enum Side{
         LEFT,
         RIGHT
     }

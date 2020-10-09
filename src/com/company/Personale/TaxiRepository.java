@@ -49,13 +49,43 @@ public class TaxiRepository {
                 e.printStackTrace();
             }
         }
+    public void taxiSpecificPlaneToGate(int planeId) {
+        String ruteNr = planeRepository.readRuteNrFromId(planeId);
+        int gateID = gateRepository.checkAvailable(planeRepository.readSizeFromModel(planeRepository.readModelFromRuteNr(ruteNr)));
 
-    public void TaxitoWaitingPosition(String ruteNr){
+        String sql = "UPDATE gate SET idPlane = ? WHERE idGate = ?";
+
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, planeId);
+            ps.setInt(2, gateID);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        registerGateInPlane(planeId, gateID);
+    }
+
+    public void TaxiToWaitingPosition(String ruteNr){
         String sql = "UPDATE planelist SET location = ? WHERE RuteListe_ruteNr = ?";
         try{
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, "Waiting");
             ps.setString(2, ruteNr);
+            ps.executeUpdate();
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    public void TaxiToRunway(int planeiD){
+        String sql = "UPDATE planelist SET location = ? WHERE idPlane = ?";
+        String plane = Integer.toString(planeiD);
+        try{
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, "RunWay");
+            ps.setString(2, plane);
             ps.executeUpdate();
         }
         catch(SQLException e){
