@@ -1,8 +1,8 @@
 package com.company.Util;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import com.company.Plane;
+
+import java.io.*;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -12,7 +12,7 @@ public class Server  extends  Thread{
     private ServerSocket serverSocket;
 
     public Server (int port) throws IOException {
-       String host = "10.111.176.147"; // Dagens lokal ip på skolen.. TJEK MIG!
+       String host = "10.111.176.139"; // Dagens lokal ip på skolen.. TJEK MIG!
 
         InetAddress address = InetAddress.getByName(host);
         serverSocket = new ServerSocket(port,10,address);
@@ -32,7 +32,7 @@ public class Server  extends  Thread{
                 out.writeUTF("I hear you : " +server.getRemoteSocketAddress());
                 //out.writeUTF("Hello connected user " + server.getLocalSocketAddress());
                 towerCommand(out,in);
-                server.close();
+               // server.close();
 
 
             }
@@ -43,18 +43,27 @@ public class Server  extends  Thread{
             catch (IOException e) {
                 e.printStackTrace();
                 break;
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
             }
 
         }
 
     }
 
-    public void towerCommand( DataOutputStream out, DataInputStream in) throws IOException {
+    public void towerCommand(DataOutputStream out, DataInputStream in) throws IOException, ClassNotFoundException {
         boolean flag = true;
         System.out.println("Tower is live");
 
-        while (flag) {
-            int test = in.readInt();
+        ObjectInputStream userobj = new ObjectInputStream(in);
+        Plane testPlane = new Plane();
+
+        testPlane.setICAO(userobj.readObject().toString());
+
+        System.out.println(userobj + " has connected with obj" + testPlane.getICAO());
+
+        while (true) {
+            int test = in.read();
             switch (test) {
 
                 case 1:
@@ -76,11 +85,6 @@ public class Server  extends  Thread{
                     break;
             }
         }
-
-
-
-
-
 
     }
 

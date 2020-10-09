@@ -1,15 +1,22 @@
 package com.company;
 
+import com.company.Personale.Job;
 import com.company.Personale.Personale;
 import com.company.Util.Client;
 import com.company.Util.Server;
 
 import java.io.IOException;
+import java.sql.Array;
+import java.sql.Connection;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
+
         DatabaseConnectionManager.getDatabaseConnection();
 
         final String ANSI_GREEN = "\u001B[32m";
@@ -49,10 +56,13 @@ public class Main {
                 }
                 break;
             case 2:
+                Client plane = new Client();
+                plane.client("Plane");
+                break;
 
             case 3:
-                Client cl = new Client();
-                cl.client();
+                Client personal = new Client();
+                personal.client("Personal");
                 break;
 
         }

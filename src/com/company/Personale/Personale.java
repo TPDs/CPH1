@@ -2,76 +2,190 @@ package com.company.Personale;
 
 //import com.mysql.cj.x.protobuf.MysqlxDatatypes;
 
+import com.company.Pending;
+
+import java.util.ArrayList;
+
 public class Personale {
 
     //I denne procedure behandles Personaleobjektet.
     //Hvad skal personaleclassen kunne.  Hvad er kravet til denne classe
-    //Det er ikke tilstrækkeligt specificeret hvad classen skal kunne
-    //Alle kan skrive her:
 
     
     //Foreløbig skal classen kunne:
     // skal se på pending task  ( eller en liste med arbejdsopgaver )
-    // skal kunne kunne opdatere i en opgave liste.
-    /*
+    // Jeg forventer at modtager et opgavenummer og en lokaliserin af hvor opgaven er
+    // Jeg skal finde den tid det tager at komme hen til det sted hvor opgaven er
+    // skal kunne opdatere i en opgave liste.
 
-       Personale obj:
-       Gate gateId.
-       Tid arbejdsdag.
-       Enum status
-       List<fly> toDo
-       Tid arbejdstid.
-       Collector til at sorterer en stack efter hvilket fly der er mest akut.
+    private int id;
+    private String role;
+    private String name;
+    private int phone;
+    private int taskId;
+    private int time;
 
+    public Personale(String role, String name) {
+        this.id = 0;
+        this.role = role;
+        this.name = name;
+        this.taskId = 0;
+        this.time = 0;
+    }
 
+    public Personale(int id, String role, String name, int taskId, int time) {
+        this.id = id;
+        this.role = role;
+        this.name = name;
+        this.taskId = taskId;
+        this.time = time;
+    }
 
-    Bagage objBagage       = new Bagage();
-    Brandstof objBradstof  = new Brandstof();
-    Rengøring objRengøring = new Rengøring();
-    GatePassagerer objGate = new GatePassagerer();    //Passagere ud af flyet
-    */
+    public void checkTask(Pending pending) {
+        if (taskId == 0) {
+            findTask(pending);
+        }
+    }
 
-    
-    public String nytfelt;
+    private void findTask(Pending pending) {
+        switch (role) {
+            case "Cleaning":
+                setCleaningTask(pending);
+                break;
+            case "Fuel":
+                setFuel(pending);
+                break;
+            case "BaggageIn":
+                setBaggageIn(pending);
+                break;
+            case "BaggageOut":
+                setBaggageOut(pending);
+                break;
+            case "PassengerIn":
+                setPassengerIn(pending);
+                break;
+            case "PassengerOut":
+                setPassengerOut(pending);
+                break;
+        }
+    }
 
-    public int idpersonale;
-    public String role;
-    public String Name;
-    public int Phone;
-    public int opgaveId;
+    private void setCleaningTask(Pending pending) {
+        ArrayList<Job> jobList = pending.fetchAll();
+        for (int i = 0; i < jobList.size(); i++) {
+            if ((jobList.get(i).getJobType().equals("Cleaning")) && (jobList.get(i).getStatus().equals("Ok"))) {
+                taskId = jobList.get(i).getId();
+                pending.delete(jobList.get(i).getId(), jobList);
+            }
+        }
+    }
+
+    private void setFuel(Pending pending) {
+        ArrayList<Job> jobList = pending.fetchAll();
+        for (int i = 0; i < jobList.size(); i++) {
+            if ((jobList.get(i).getJobType().equals("Fuel")) && (jobList.get(i).getStatus().equals("Ok"))) {
+                taskId = jobList.get(i).getId();
+                pending.delete(jobList.get(i).getId(), jobList);
+            }
+        }
+    }
+
+    private void setBaggageIn(Pending pending) {
+        ArrayList<Job> jobList = pending.fetchAll();
+        for (int i = 0; i < jobList.size(); i++) {
+            if ((jobList.get(i).getJobType().equals("BaggageIn")) && (jobList.get(i).getStatus().equals("Ok"))) {
+                taskId = jobList.get(i).getId();
+                pending.delete(jobList.get(i).getId(), jobList);
+            }
+        }
+    }
+
+    private void setBaggageOut(Pending pending) {
+        ArrayList<Job> jobList = pending.fetchAll();
+        for (int i = 0; i < jobList.size(); i++) {
+            if ((jobList.get(i).getJobType().equals("BaggageOut")) && (jobList.get(i).getStatus().equals("Ok"))) {
+                taskId = jobList.get(i).getId();
+                pending.delete(jobList.get(i).getId(), jobList);
+            }
+        }
+    }
+
+    private void setPassengerIn(Pending pending) {
+        ArrayList<Job> jobList = pending.fetchAll();
+        for (int i = 0; i < jobList.size(); i++) {
+            if ((jobList.get(i).getJobType().equals("PassengerIn")) && (jobList.get(i).getStatus().equals("Ok"))) {
+                taskId = jobList.get(i).getId();
+                pending.delete(jobList.get(i).getId(), jobList);
+            }
+        }
+    }
+
+    private void setPassengerOut(Pending pending) {
+        ArrayList<Job> jobList = pending.fetchAll();
+        for (int i = 0; i < jobList.size(); i++) {
+            if ((jobList.get(i).getJobType().equals("PassengerOut")) && (jobList.get(i).getStatus().equals("Ok"))) {
+                taskId = jobList.get(i).getId();
+                pending.delete(jobList.get(i).getId(), jobList);
+            }
+        }
+    }
 
     //------------------------------------set-----------------------------------------------
-    public void setIdpersonale(int idpersonale) {
-        this.idpersonale = idpersonale;
+
+    public void setId(int id) {
+        this.id = id;
     }
-    public void setRde(String rde) {
+
+    public void setRole(String role) {
         this.role = role;
     }
-    public void setName(String Name) {
-        this.Name = Name;
+
+    public void setName(String name) {
+        this.name = name;
     }
-    public void setPhone(int Phone) {
-        this.Phone = Phone;
+
+    public void setPhone(int phone) {
+        this.phone = phone;
     }
-    public void setOpgaveId(int opgaveId) {
-        this.opgaveId = opgaveId;
+
+    public void setTaskId(int taskId) {
+        this.taskId = taskId;
     }
+
+    public void setTime(int time) {
+        this.time = time;
+    }
+
     //------------------------------------get-----------------------------------------------
 
-    public int getIdpersonale() {
-        return idpersonale;
+    public int getId() {
+        return id;
     }
-    public String getRde() {
+
+    public String getRole() {
         return role;
     }
+
     public String getName() {
-        return Name;
+        return name;
     }
+
     public int getPhone() {
-        return Phone;
+        return phone;
     }
-    public int getOpgaveId() {return opgaveId;}
+
+    public int getTaskId() {
+        return taskId;
+    }
+
+    public int getTime() {
+        return time;
+    }
+
+
     //----------------------------------------------------------------------------------------
+
+
 
 
 }
