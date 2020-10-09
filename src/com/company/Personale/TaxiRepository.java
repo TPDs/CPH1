@@ -92,4 +92,17 @@ public class TaxiRepository {
             e.printStackTrace();
         }
     }
+    public void TaxiToParked(int planeiD){
+        String sql = "UPDATE planelist SET location = ? WHERE idPlane = ?";
+        String plane = Integer.toString(planeiD);
+        try{
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, "Parked");
+            ps.setString(2, plane);
+            ps.executeUpdate();
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
 }
