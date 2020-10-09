@@ -1,23 +1,26 @@
 package com.company.Util;
 
+import com.company.Gate;
+import com.company.GateRepository;
 import com.company.Plane;
+import com.company.PlaneRepository;
 
 import java.io.*;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
+import java.util.List;
 
-public class Server  extends  Thread{
+public class Server extends Thread{
     private ServerSocket serverSocket;
 
     public Server (int port) throws IOException {
-       String host = "10.111.176.139"; // Dagens lokal ip på skolen.. TJEK MIG!
+       String host = "10.111.176.147"; // Dagens lokal ip på skolen.. TJEK MIG!
 
         InetAddress address = InetAddress.getByName(host);
-        serverSocket = new ServerSocket(port,10,address);
+        serverSocket = new ServerSocket(port,1000000,address);
         //serverSocket.setSoTimeout(100000);
-
     }
 
     public void run() {
@@ -26,13 +29,18 @@ public class Server  extends  Thread{
                 System.out.println("Tårn is Live on ip: " + serverSocket.getLocalPort());
                 Socket server = serverSocket.accept();
                 DataInputStream in = new DataInputStream(server.getInputStream());
-
-                System.out.println(in.readUTF());
                 DataOutputStream out = new DataOutputStream(server.getOutputStream());
-                out.writeUTF("I hear you : " +server.getRemoteSocketAddress());
-                //out.writeUTF("Hello connected user " + server.getLocalSocketAddress());
+                String user = in.readUTF();
+                String rute = in.readUTF();
+
+                PlaneRepository planeRepository = new PlaneRepository();
+                GateRepository gate = new GateRepository();
+                int planID = planeRepository.findPlaneIdFromRutenNr(rute);
+                Gate lok = gate.findPlaneIDInGates(planID);
+                out.writeUTF("Du er på plads " + lok.getIdGate());
+                out.writeUTF("I hear you " + user + " :" + rute + " Dit iD er " +planID);
                 towerCommand(out,in);
-               // server.close();
+               server.close();
 
 
             }
@@ -53,16 +61,9 @@ public class Server  extends  Thread{
 
     public void towerCommand(DataOutputStream out, DataInputStream in) throws IOException, ClassNotFoundException {
         boolean flag = true;
-        System.out.println("Tower is live");
+        System.out.println("TowerCommand loaded...");
 
-        ObjectInputStream userobj = new ObjectInputStream(in);
-        Plane testPlane = new Plane();
-
-        testPlane.setICAO(userobj.readObject().toString());
-
-        System.out.println(userobj + " has connected with obj" + testPlane.getICAO());
-
-        while (true) {
+        while (flag) {
             int test = in.read();
             switch (test) {
 

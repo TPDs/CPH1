@@ -83,40 +83,4 @@ public class Pending {
         }
         return false;
     }
-
-    public void testUpload(Pending pending) {
-        LocalDateTime time = LocalDateTime.now();
-        pending.add("Cleaning", "A8", "Large", time, "Ok");
-        pending.add("Fuel", "A8", "Large", time, "Ok");
-        pending.add("BaggageIn", "A8", "Large", time, "Ok");
-        pending.add("BaggageOut", "A8", "Large", time, "Ok");
-        pending.add("PassengerIn", "A8", "Large", time, "Ok");
-        pending.add("PassengerOut", "A8", "Large", time, "Ok");
-
-        pending.add("Cleaning", "A9", "Standard", time, "Ok");
-        pending.add("Fuel", "A9", "Standard", time, "Ok");
-        pending.add("BaggageIn", "A9", "Standard", time, "Ok");
-        pending.add("BaggageOut", "A9", "Standard", time, "Ok");
-        pending.add("PassengerIn", "A9", "Standard", time, "Ok");
-        pending.add("PassengerOut", "A9", "Standard", time, "Ok");
-
-        pending.add("Cleaning", "A8", "Small", time, "Ok");
-        pending.add("Fuel", "A8", "Small", time, "Ok");
-        pending.add("BaggageIn", "A8", "Small", time, "Ok");
-        pending.add("BaggageOut", "A8", "Small", time, "Ok");
-        pending.add("PassengerIn", "A8", "Small", time, "Ok");
-        pending.add("PassengerOut", "A8", "Small", time, "Ok");
-    }
-
-    public void testAfDownloadOgSlet(Pending pending) {
-        ArrayList<Job> jobList = pending.fetchAll();
-        System.out.println(jobList);
-
-        Collections.sort(jobList);
-        System.out.println(jobList);
-
-        pending.delete(jobList.get(0).getId(), jobList);
-        System.out.println(jobList);
-    }
-
 }

@@ -16,6 +16,7 @@ public class TaxiRepository {
     GateRepository gateRepository = new GateRepository();
     Connection conn = DatabaseConnectionManager.getDatabaseConnection();
 
+    //Finds the first available plane, and the first available gate based on the plane's size and taxi's the plane there.
     public void taxiFirstWaitingPlaneToFirstAvailableGate() {
         int planeID = planeRepository.chooseFirstWaitingPlane(planeRepository.checkWaitingPlanes());
         String ruteNr = planeRepository.readRuteNrFromId(planeID);
@@ -34,7 +35,7 @@ public class TaxiRepository {
         }
         registerGateInPlane(planeID, gateID);
     }
-
+        //Registers the gateNr in the planes "location" row.
         public void registerGateInPlane(int flyID, int gateNavn){
             String sql = "UPDATE planelist SET location = ? WHERE idPlane = ?";
 
@@ -49,23 +50,25 @@ public class TaxiRepository {
                 e.printStackTrace();
             }
         }
+        //Taxi a specific plane to the first available gate of it's size
     public void taxiSpecificPlaneToFirstAvailableGate(int planeId) {
         String ruteNr = planeRepository.readRuteNrFromId(planeId);
-        int gateID = gateRepository.checkAvailable(planeRepository.readSizeFromModel(planeRepository.readModelFromRuteNr(ruteNr)));
+        int gateId = gateRepository.checkAvailable(planeRepository.readSizeFromModel(planeRepository.readModelFromRuteNr(ruteNr)));
 
         String sql = "UPDATE gate SET idPlane = ? WHERE idGate = ?";
 
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, planeId);
-            ps.setInt(2, gateID);
+            ps.setInt(2, gateId);
             ps.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        registerGateInPlane(planeId, gateID);
+        registerGateInPlane(planeId, gateId);
     }
+    //taxi's a specific plane to a specific gate.
     public void taxiSpecificPlaneToSpecificGate(int planeId, int gateID) {
 
         String sql = "UPDATE gate SET idPlane = ? WHERE idGate = ?";
@@ -100,7 +103,7 @@ public class TaxiRepository {
         String plane = Integer.toString(planeiD);
         try{
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, "RunWay");
+            ps.setString(1, "Runway");
             ps.setString(2, plane);
             ps.executeUpdate();
         }

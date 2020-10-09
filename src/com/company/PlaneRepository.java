@@ -1,14 +1,19 @@
 package com.company;
 
+import com.company.Personale.Job;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class PlaneRepository {
     Connection conn = DatabaseConnectionManager.getDatabaseConnection();
 
+    //Lands a plane, creating it based on a ruteNr.
     public boolean landplane(String ruteNr){
         Plane fly = new Plane();
         String modelnummer = readModelFromRuteNr(ruteNr);
@@ -22,15 +27,13 @@ public class PlaneRepository {
 
 
             int insertedRows = ps.executeUpdate();
-            if(insertedRows > 0){
-                System.out.println("Plane was successfully created!");
-            }
         } catch(SQLException e){
             e.printStackTrace();
             return false;
         }
         return true;
     }
+
     //Henter et modelNr i databasen ud fra et ruteNr
     public String readModelFromRuteNr(String ruteNr){
         String sql = "SELECT AC FROM ruteliste WHERE ruteNr = ?";
@@ -70,7 +73,7 @@ public class PlaneRepository {
         }
         return result;
     }
-
+    //Finds the planeID in planeslist from the given ruteNr
     public int findPlaneIdFromRutenNr(String ruteNr){
         String sql = "SELECT idPlane FROM planelist WHERE  RuteListe_ruteNr = ?";
         Plane plane = new Plane();
@@ -89,17 +92,12 @@ public class PlaneRepository {
         }
         return result;
     }
-
+    //Deletes a plane with the given id from planelist
     public boolean deletePlane(int id){
         try {
             String sql = "DELETE FROM planelist WHERE idPlane = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
-            int deletedrows = ps.executeUpdate();
-            if(deletedrows > 0){
-                System.out.println("Deletion succesful");
-                return true;
-            }
             ps.executeUpdate();
         }
         catch(SQLException e){
@@ -107,10 +105,7 @@ public class PlaneRepository {
         }
         return false;
     }
-
-
-
-
+    //Checks waiting planes from planelist
     public ArrayList<Integer> checkWaitingPlanes(){
         ArrayList<Integer> waitingPlanes = new ArrayList<>();
         String sql = "SELECT * FROM planelist WHERE location = ?";
@@ -133,6 +128,7 @@ public class PlaneRepository {
         int result = waitingplanes.get(0);
         return result;
     }
+    //reads the ruteNr from a given ID in planelist
     public String readRuteNrFromId(int planeId){
         String sql = "SELECT RuteListe_ruteNr FROM planelist WHERE  idPlane = ?";
         Plane plane = new Plane();
@@ -145,6 +141,26 @@ public class PlaneRepository {
                 plane.setRuteNr(rs.getString("RuteListe_ruteNr"));
             }
             result = plane.getRuteNr();
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+    //Creates a list of all ruteNr's in rutelist and chooses a random one, returning it's ruteNr
+    public String generateRandomPlane(){
+        ArrayList<String> ruteNrs = new ArrayList<>();
+        String sql = "SELECT ruteNr FROM ruteliste WHERE ruteNr != null";
+        String result = null;
+        try{
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                ruteNrs.add(rs.getString("ruteNr"));
+            }
+            Random ran = new Random(ruteNrs.size());
+            int index = ran.nextInt();
+            result = ruteNrs.get(index);
         }
         catch(SQLException e){
             e.printStackTrace();
