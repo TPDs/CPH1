@@ -1,4 +1,7 @@
 package com.company.Personale;
+import com.company.Personale.Rengøring;
+import com.company.TaskTime.TaskTime;
+import com.company.TimeLine;
 
 //import com.mysql.cj.x.protobuf.MysqlxDatatypes;
 
@@ -10,9 +13,17 @@ public class Personale {
     //Alle kan skrive her:
 
     
-    //Foreløbig skal classen kunne:
+    //Foreløbig skal classen kunne: 20201008
     // skal se på pending task  ( eller en liste med arbejdsopgaver )
-    // skal kunne kunne opdatere i en opgave liste.
+    // Jeg forventer at modtager et opgavenummer og en lokaliserin af hvor opgaven er
+    // Jeg skal finde den tid det tager at komme hen til det sted hvor opgaven er
+    // skal kunne opdatere i en opgave liste.
+    //
+    //
+    //Jeg vil simulere at opgavenummeret er 1
+    //Jeg vil simulere at gatenr er 12
+
+    //Jeg vil simulere at
     /*
 
        Personale obj:
@@ -31,6 +42,8 @@ public class Personale {
     GatePassagerer objGate = new GatePassagerer();    //Passagere ud af flyet
     */
 
+
+
     
     public String nytfelt;
 
@@ -39,12 +52,15 @@ public class Personale {
     public String Name;
     public int Phone;
     public int opgaveId;
+    public Personale(){};
+    Rengøring objRengøring = new Rengøring();
+    //public int estimeret_Tid_i_minutter = 0;
 
     //------------------------------------set-----------------------------------------------
     public void setIdpersonale(int idpersonale) {
         this.idpersonale = idpersonale;
     }
-    public void setRde(String rde) {
+    public void setRole(String rde) {
         this.role = role;
     }
     public void setName(String Name) {
@@ -61,7 +77,7 @@ public class Personale {
     public int getIdpersonale() {
         return idpersonale;
     }
-    public String getRde() {
+    public String getRole() {
         return role;
     }
     public String getName() {
@@ -72,6 +88,23 @@ public class Personale {
     }
     public int getOpgaveId() {return opgaveId;}
     //----------------------------------------------------------------------------------------
+
+    public String størrelse = "stor";
+    int estimeret_Tid_i_minutter = objRengøring.rengor_Fly(størrelse);
+    //Rengøring objRengøring = new Rengøring();
+    //String ren = objRengøring.rengor_Fly1();
+    //20201009  Der er fortsat usikkerhed om hvad denne classe skal kunne, og de oplysninger
+    // classen skal bruge er ikke klar endnu. Jeg forbereder nogle kald til den classe
+    // hvor jeg tror at jeg kan få fat i de oplysninger som denne classe skal bruge.
+    // Alle er velkommen til at skrive her hvis de har bedre ideer.
+
+
+    TaskTime objTaskTime = new TaskTime();
+    TimeLine objTimeLine = new TimeLine();
+    int personaleTilNabo          = objTaskTime.getPersonaleTilNabo();
+    int personaleTilDenneTerminal = objTaskTime.getPersonaleTilDenneTerminal();
+
+
 
 
 }
