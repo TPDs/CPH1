@@ -1,6 +1,7 @@
-package com.company;
+package com.company.Repository;
 
-import javax.xml.transform.Result;
+import com.company.Airport.Gate;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

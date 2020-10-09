@@ -1,11 +1,10 @@
-package com.company;
+package com.company.Repository;
 
 import com.company.Personale.Job;
 
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Pending {
     Connection conn = DatabaseConnectionManager.getDatabaseConnection();

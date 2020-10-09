@@ -2,7 +2,7 @@ package com.company.Personale;
 
 //import com.mysql.cj.x.protobuf.MysqlxDatatypes;
 
-import com.company.Pending;
+import com.company.Repository.Pending;
 
 import java.util.ArrayList;
 

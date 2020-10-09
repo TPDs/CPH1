@@ -1,4 +1,6 @@
-package com.company;
+package com.company.Repository;
+
+import com.company.AirPlane.Rute;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

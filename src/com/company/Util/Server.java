@@ -1,16 +1,14 @@
 package com.company.Util;
 
-import com.company.Gate;
-import com.company.GateRepository;
-import com.company.Plane;
-import com.company.PlaneRepository;
+import com.company.Airport.Gate;
+import com.company.Repository.GateRepository;
+import com.company.Repository.PlaneRepository;
 
 import java.io.*;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
-import java.util.List;
 
 public class Server extends Thread{
     private ServerSocket serverSocket;

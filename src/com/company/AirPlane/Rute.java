@@ -1,4 +1,4 @@
-package com.company;
+package com.company.AirPlane;
 
 public class Rute {
     String date;

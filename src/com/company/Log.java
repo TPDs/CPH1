@@ -1,11 +1,11 @@
 package com.company;
 
-import javax.xml.crypto.Data;
+import com.company.AirPlane.Plane;
+import com.company.Repository.DatabaseConnectionManager;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.*;
-import java.util.Collection;
 
 public class Log {
 
