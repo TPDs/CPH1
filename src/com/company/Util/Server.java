@@ -1,5 +1,7 @@
 package com.company.Util;
 
+import com.company.Plane;
+
 import java.io.*;
 import java.net.InetAddress;
 import java.net.ServerSocket;
@@ -30,7 +32,7 @@ public class Server  extends  Thread{
                 out.writeUTF("I hear you : " +server.getRemoteSocketAddress());
                 //out.writeUTF("Hello connected user " + server.getLocalSocketAddress());
                 towerCommand(out,in);
-                server.close();
+               // server.close();
 
 
             }
@@ -47,13 +49,16 @@ public class Server  extends  Thread{
 
     }
 
-    public void towerCommand( DataOutputStream out, DataInputStream in) throws IOException {
+    public void towerCommand(DataOutputStream out, DataInputStream in) throws IOException, ClassNotFoundException {
         boolean flag = true;
         System.out.println("Tower is live");
 
         ObjectInputStream userobj = new ObjectInputStream(in);
+        Plane testPlane = new Plane();
 
-        System.out.println(userobj + " has connected");
+        testPlane.setICAO(userobj.readObject().toString());
+
+        System.out.println(userobj + " has connected with obj" + testPlane.getICAO());
 
         while (true) {
             int test = in.read();

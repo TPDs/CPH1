@@ -22,10 +22,10 @@ public class Client {
         OutputStream toServer = client.getOutputStream();
         DataOutputStream out = new DataOutputStream(toServer);
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(out);
+        Plane testplane = new Plane();
+        testplane.setICAO("test of obj");
 
-        objectOutputStream.writeObject(user);
-
-
+        objectOutputStream.writeObject(testplane);
 
         out.writeInt(2);
 
