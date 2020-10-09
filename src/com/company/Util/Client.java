@@ -1,45 +1,55 @@
 package com.company.Util;
 
-import com.company.Plane;
-
 import java.io.*;
 import java.net.Socket;
 
 public class Client {
 
 
-    public void client(String user){
-    String serverName = "10.111.176.147"; // Dagens lokal ip på skolen.. TJEK MIG!
-    int port = 48880;
+    public void client(String user) {
+        String serverName = "10.111.176.139"; // Dagens lokal ip på skolen.. TJEK MIG!
+        int port = 48880;
 
 
-    try {
-        System.out.println("Connecting to " + serverName + " på port " + port);
-        Socket client = new Socket(serverName, port);
+        try {
+            System.out.println("Connecting to " + serverName + " på port " + port);
+            Socket client = new Socket(serverName, port);
+
+            System.out.println(user + " connected via " + client.getRemoteSocketAddress());
+            OutputStream toServer = client.getOutputStream();
+            DataOutputStream out = new DataOutputStream(toServer);
+            InputStream inFromServer = client.getInputStream();
+            DataInputStream in = new DataInputStream(inFromServer);
 
 
-        System.out.println(user + " connected via " + client.getRemoteSocketAddress());
-        OutputStream toServer = client.getOutputStream();
-        DataOutputStream out = new DataOutputStream(toServer);
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(out);
-        Plane testplane = new Plane();
-        testplane.setICAO("test of obj");
+            out.writeUTF(user);
+            out.writeUTF("D8 3563");
+            out.writeInt(1);
 
-        objectOutputStream.writeObject(testplane);
 
-        out.writeInt(2);
+            System.out.println("Server :" + in.readUTF());
+            System.out.println("Server :" + in.readUTF());
+            System.out.println("Server :" + in.readUTF());
 
-        InputStream inFromServer = client.getInputStream();
-        DataInputStream in = new DataInputStream(inFromServer);
-        Plane test = new Plane();
-        System.out.println("Server :" + in.readUTF());
 
-        client.close();
+
+            plane(in,out);
+            client.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
-    catch (IOException e) {
-        e.printStackTrace();
+
+    public void plane (DataInputStream in,DataOutputStream out) throws IOException {
+        out.writeUTF("hej");
+        in.readUTF();
+
+
+
+
     }
 
-}
+
 }
