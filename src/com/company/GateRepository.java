@@ -38,7 +38,8 @@ public class GateRepository {
     public int checkAvailable(String pSize){
         List<Gate> gates = new ArrayList<>();
         int result = 0;
-        String sql = "SELECT * FROM gate WHERE idPlane IS NULL AND size = ?";
+        String sql = "SELECT * FROM gate WHERE idPlane IS NULL AND size = " + pSize;
+
         try{
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, pSize);
@@ -58,7 +59,28 @@ public class GateRepository {
         catch (SQLException e){
             e.printStackTrace();
         }
+        System.out.println(result);
         return result;
 
     }
+
+    public boolean removePlaneFromGate(Plane plane){
+        String sql = "DELETE FROM gate WHERE idPlane=?";
+
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, plane.getId());
+
+            int deletedRows = ps.executeUpdate();
+            if (deletedRows > 0) {
+                System.out.println("Plane removed from gate");
+            }
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
 }
