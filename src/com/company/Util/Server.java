@@ -1,8 +1,6 @@
 package com.company.Util;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -12,7 +10,7 @@ public class Server  extends  Thread{
     private ServerSocket serverSocket;
 
     public Server (int port) throws IOException {
-       String host = "10.111.176.147"; // Dagens lokal ip på skolen.. TJEK MIG!
+       String host = "10.111.176.139"; // Dagens lokal ip på skolen.. TJEK MIG!
 
         InetAddress address = InetAddress.getByName(host);
         serverSocket = new ServerSocket(port,10,address);
@@ -53,8 +51,12 @@ public class Server  extends  Thread{
         boolean flag = true;
         System.out.println("Tower is live");
 
-        while (flag) {
-            int test = in.readInt();
+        ObjectInputStream userobj = new ObjectInputStream(in);
+
+        System.out.println(userobj + " has connected");
+
+        while (true) {
+            int test = in.read();
             switch (test) {
 
                 case 1:
@@ -76,11 +78,6 @@ public class Server  extends  Thread{
                     break;
             }
         }
-
-
-
-
-
 
     }
 

@@ -49,10 +49,13 @@ public class Main {
                 }
                 break;
             case 2:
+                Client plane = new Client();
+                plane.client("Plane");
+                break;
 
             case 3:
-                Client cl = new Client();
-                cl.client();
+                Client personal = new Client();
+                personal.client("Personal");
                 break;
 
         }

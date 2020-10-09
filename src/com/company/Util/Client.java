@@ -1,18 +1,16 @@
 package com.company.Util;
 
+import com.company.Plane;
+
 import java.io.*;
 import java.net.Socket;
 
 public class Client {
 
 
-    public void client(){
+    public void client(String user){
     String serverName = "10.111.176.147"; // Dagens lokal ip på skolen.. TJEK MIG!
     int port = 48880;
-
-
-
-
 
 
     try {
@@ -20,17 +18,22 @@ public class Client {
         Socket client = new Socket(serverName, port);
 
 
-        System.out.println("Connected til " + client.getRemoteSocketAddress());
+        System.out.println(user + " connected via " + client.getRemoteSocketAddress());
         OutputStream toServer = client.getOutputStream();
         DataOutputStream out = new DataOutputStream(toServer);
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(out);
 
-        //out.writeUTF("Hello fra " + client.getLocalSocketAddress());
+        objectOutputStream.writeObject(user);
 
-        out.writeInt(1);
+
+
+        out.writeInt(2);
+
         InputStream inFromServer = client.getInputStream();
         DataInputStream in = new DataInputStream(inFromServer);
-
+        Plane test = new Plane();
         System.out.println("Server :" + in.readUTF());
+
         client.close();
 
     }
