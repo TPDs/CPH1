@@ -1,18 +1,13 @@
 package com.company;
 
-import com.company.Personale.TaxiRepository;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 class MainTest {
-    TaxiRepository taxiRepository = new TaxiRepository();
+    /*TaxiRepository taxiRepository = new TaxiRepository();
     @Test
     void testTaxiToGate(){
         taxiRepository.registerGateInPlane(1, 22);
-    }
+    }*/
 
 
 

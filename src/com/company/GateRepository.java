@@ -64,12 +64,12 @@ public class GateRepository {
 
     }
 
-    public boolean removePlaneFromGate(Plane plane){
-        String sql = "DELETE FROM gate WHERE idPlane=?";
+    public boolean removePlaneFromGate(int id){
+        String sql = "UPDATE gate SET idPlane = NULL WHERE idPlane=?";
 
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, plane.getId());
+            ps.setInt(1, id);
 
             int deletedRows = ps.executeUpdate();
             if (deletedRows > 0) {
@@ -80,6 +80,23 @@ public class GateRepository {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public Gate findPlaneIDInGates(int id){
+        String sql = "SELECT * FROM gate WHERE idPlane=?";
+        Gate gate = new Gate();
+
+        try{
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                gate.setIdGate(rs.getInt(1));
+            }
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        return gate;
     }
 
 
