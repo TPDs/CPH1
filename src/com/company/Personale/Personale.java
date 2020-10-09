@@ -1,108 +1,135 @@
 package com.company.Personale;
-import com.company.Personale.Rengøring;
-import com.company.TaskTime.TaskTime;
-import com.company.TimeLine;
 
 //import com.mysql.cj.x.protobuf.MysqlxDatatypes;
+
+import com.company.Pending;
+
+import java.util.ArrayList;
 
 public class Personale {
 
     //I denne procedure behandles Personaleobjektet.
     //Hvad skal personaleclassen kunne.  Hvad er kravet til denne classe
-    //Det er ikke tilstrækkeligt specificeret hvad classen skal kunne
-    //Alle kan skrive her:
 
     
-    //Foreløbig skal classen kunne: 20201008
+    //Foreløbig skal classen kunne:
     // skal se på pending task  ( eller en liste med arbejdsopgaver )
     // Jeg forventer at modtager et opgavenummer og en lokaliserin af hvor opgaven er
     // Jeg skal finde den tid det tager at komme hen til det sted hvor opgaven er
     // skal kunne opdatere i en opgave liste.
-    //
-    //
-    //Jeg vil simulere at opgavenummeret er 1
-    //Jeg vil simulere at gatenr er 12
 
-    //Jeg vil simulere at
-    /*
+    private int id;
+    private String role;
+    private String name;
+    private int phone;
+    private int taskId;
+    private int time;
 
-       Personale obj:
-       Gate gateId.
-       Tid arbejdsdag.
-       Enum status
-       List<fly> toDo
-       Tid arbejdstid.
-       Collector til at sorterer en stack efter hvilket fly der er mest akut.
+    public Personale(String role, String name) {
+        this.id = 0;
+        this.role = role;
+        this.name = name;
+        this.taskId = 0;
+        this.time = 0;
+    }
 
+    public Personale(int id, String role, String name, int taskId, int time) {
+        this.id = id;
+        this.role = role;
+        this.name = name;
+        this.taskId = taskId;
+        this.time = time;
+    }
 
+    public void checkTask(Pending pending) {
+        if (taskId == 0) {
+            findTask(pending);
+        }
+    }
 
-    Bagage objBagage       = new Bagage();
-    Brandstof objBradstof  = new Brandstof();
-    Rengøring objRengøring = new Rengøring();
-    GatePassagerer objGate = new GatePassagerer();    //Passagere ud af flyet
-    */
+    private void findTask(Pending pending) {
+        switch (role) {
+            case "Cleaning":
+                setCleaningTask(pending);
+                break;
+            case "Fuel":
+                break;
+            case "BaggageIn":
+                break;
+            case "BaggageOut":
+                break;
+            case "PassengerIn":
+                break;
+            case "PassengerOut":
+                break;
+        }
+    }
 
+    private void setCleaningTask(Pending pending) {
+        ArrayList<Job> jobList = pending.fetchAll();
+        for (int i = 0; i < jobList.size(); i++) {
+            if ((jobList.get(i).getJobType().equals("Cleaning")) && (jobList.get(i).getStatus().equals("Ok"))) {
+                taskId = jobList.get(i).getId();
+                pending.delete(jobList.get(i).getId(), jobList);
+            }
+        }
+    }
 
-
-    
-    public String nytfelt;
-
-    public int idpersonale;
-    public String role;
-    public String Name;
-    public int Phone;
-    public int opgaveId;
-    public Personale(){};
-    Rengøring objRengøring = new Rengøring();
-    //public int estimeret_Tid_i_minutter = 0;
 
     //------------------------------------set-----------------------------------------------
-    public void setIdpersonale(int idpersonale) {
-        this.idpersonale = idpersonale;
+
+    public void setId(int id) {
+        this.id = id;
     }
-    public void setRole(String rde) {
+
+    public void setRole(String role) {
         this.role = role;
     }
-    public void setName(String Name) {
-        this.Name = Name;
+
+    public void setName(String name) {
+        this.name = name;
     }
-    public void setPhone(int Phone) {
-        this.Phone = Phone;
+
+    public void setPhone(int phone) {
+        this.phone = phone;
     }
-    public void setOpgaveId(int opgaveId) {
-        this.opgaveId = opgaveId;
+
+    public void setTaskId(int taskId) {
+        this.taskId = taskId;
     }
+
+    public void setTime(int time) {
+        this.time = time;
+    }
+
     //------------------------------------get-----------------------------------------------
 
-    public int getIdpersonale() {
-        return idpersonale;
+    public int getId() {
+        return id;
     }
+
     public String getRole() {
         return role;
     }
+
     public String getName() {
-        return Name;
+        return name;
     }
+
     public int getPhone() {
-        return Phone;
+        return phone;
     }
-    public int getOpgaveId() {return opgaveId;}
+
+    public int getTaskId() {
+        return taskId;
+    }
+
+    public int getTime() {
+        return time;
+    }
+
+
     //----------------------------------------------------------------------------------------
-
-    public String størrelse = "stor";
-    int estimeret_Tid_i_minutter = objRengøring.rengor_Fly(størrelse);
-    //Rengøring objRengøring = new Rengøring();
-    //String ren = objRengøring.rengor_Fly1();
-    //20201009  Der er fortsat usikkerhed om hvad denne classe skal kunne, og de oplysninger
-    // classen skal bruge er ikke klar endnu. Jeg forbereder nogle kald til den classe
-    // hvor jeg tror at jeg kan få fat i de oplysninger som denne classe skal bruge.
-    // Alle er velkommen til at skrive her hvis de har bedre ideer.
-
-
-    TaskTime objTaskTime = new TaskTime();
-    TimeLine objTimeLine = new TimeLine();
-    int personaleTilNabo          = objTaskTime.getPersonaleTilNabo();
-    int personaleTilDenneTerminal = objTaskTime.getPersonaleTilDenneTerminal();
 
 
 

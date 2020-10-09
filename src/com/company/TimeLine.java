@@ -1,26 +1,30 @@
 package com.company;
 
-import java.time.LocalTime;
+import com.company.Personale.Job;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class TimeLine {
 
-    //
+    // Køre i et loop uden slutning hvor i hvert loop finder den tidspunktet for nu
+    // kalder worklist check om de er udført
+    // venter et givent antal millisekunder
     public static void time(ArrayList<Job> workList) {
         int i = 0;
         while (i == 0) {
-            LocalTime time = LocalTime.now();
+            LocalDateTime time = LocalDateTime.now();
             timeLine(time, workList);
-            pause(10000);
+            pause(5000);
         }
     }
 
-    public static void timeLine(LocalTime time, ArrayList<Job> workList) {
+    public static void timeLine(LocalDateTime time, ArrayList<Job> workList) {
         int i = 0;
         //System.out.println("The time is: " + time);
         while (i == 0) {
             if (workList.size() > 0) {
-                LocalTime time1 = workList.get(0).getMust();
+                LocalDateTime time1 = workList.get(0).getMust();
                 if (time1.isBefore(time)) {
                     System.out.println(workList.get(0));
                     workList.remove(0);
