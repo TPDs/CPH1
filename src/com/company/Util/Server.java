@@ -16,12 +16,11 @@ public class Server extends Thread{
     private ServerSocket serverSocket;
 
     public Server (int port) throws IOException {
-       String host = "10.111.176.139"; // Dagens lokal ip på skolen.. TJEK MIG!
+       String host = "10.111.176.147"; // Dagens lokal ip på skolen.. TJEK MIG!
 
         InetAddress address = InetAddress.getByName(host);
         serverSocket = new ServerSocket(port,1000000,address);
         //serverSocket.setSoTimeout(100000);
-
     }
 
     public void run() {
