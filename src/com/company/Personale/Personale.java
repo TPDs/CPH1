@@ -53,14 +53,19 @@ public class Personale {
                 setCleaningTask(pending);
                 break;
             case "Fuel":
+                setFuel(pending);
                 break;
             case "BaggageIn":
+                setBaggageIn(pending);
                 break;
             case "BaggageOut":
+                setBaggageOut(pending);
                 break;
             case "PassengerIn":
+                setPassengerIn(pending);
                 break;
             case "PassengerOut":
+                setPassengerOut(pending);
                 break;
         }
     }
@@ -75,6 +80,55 @@ public class Personale {
         }
     }
 
+    private void setFuel(Pending pending) {
+        ArrayList<Job> jobList = pending.fetchAll();
+        for (int i = 0; i < jobList.size(); i++) {
+            if ((jobList.get(i).getJobType().equals("Fuel")) && (jobList.get(i).getStatus().equals("Ok"))) {
+                taskId = jobList.get(i).getId();
+                pending.delete(jobList.get(i).getId(), jobList);
+            }
+        }
+    }
+
+    private void setBaggageIn(Pending pending) {
+        ArrayList<Job> jobList = pending.fetchAll();
+        for (int i = 0; i < jobList.size(); i++) {
+            if ((jobList.get(i).getJobType().equals("BaggageIn")) && (jobList.get(i).getStatus().equals("Ok"))) {
+                taskId = jobList.get(i).getId();
+                pending.delete(jobList.get(i).getId(), jobList);
+            }
+        }
+    }
+
+    private void setBaggageOut(Pending pending) {
+        ArrayList<Job> jobList = pending.fetchAll();
+        for (int i = 0; i < jobList.size(); i++) {
+            if ((jobList.get(i).getJobType().equals("BaggageOut")) && (jobList.get(i).getStatus().equals("Ok"))) {
+                taskId = jobList.get(i).getId();
+                pending.delete(jobList.get(i).getId(), jobList);
+            }
+        }
+    }
+
+    private void setPassengerIn(Pending pending) {
+        ArrayList<Job> jobList = pending.fetchAll();
+        for (int i = 0; i < jobList.size(); i++) {
+            if ((jobList.get(i).getJobType().equals("PassengerIn")) && (jobList.get(i).getStatus().equals("Ok"))) {
+                taskId = jobList.get(i).getId();
+                pending.delete(jobList.get(i).getId(), jobList);
+            }
+        }
+    }
+
+    private void setPassengerOut(Pending pending) {
+        ArrayList<Job> jobList = pending.fetchAll();
+        for (int i = 0; i < jobList.size(); i++) {
+            if ((jobList.get(i).getJobType().equals("PassengerOut")) && (jobList.get(i).getStatus().equals("Ok"))) {
+                taskId = jobList.get(i).getId();
+                pending.delete(jobList.get(i).getId(), jobList);
+            }
+        }
+    }
 
     //------------------------------------set-----------------------------------------------
 
