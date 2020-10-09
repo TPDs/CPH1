@@ -59,7 +59,6 @@ public class GateRepository {
         catch (SQLException e){
             e.printStackTrace();
         }
-        System.out.println(result);
         return result;
 
     }
@@ -98,6 +97,5 @@ public class GateRepository {
         }
         return gate;
     }
-
 
 }
