@@ -26,7 +26,6 @@ public class Job implements Comparable<Job>{
         this.size = size;
         this.status = status;
 
-        TaskTime tasks = taskTime(size);
         name = name(jobType, gate, size);
         this.must = timeJob(jobType, size, must);
     }

@@ -31,6 +31,7 @@ public class PlaneRepository {
         }
         return true;
     }
+
     //Henter et modelNr i databasen ud fra et ruteNr
     public String readModelFromRuteNr(String ruteNr){
         String sql = "SELECT AC FROM ruteliste WHERE ruteNr = ?";
