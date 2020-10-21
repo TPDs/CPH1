@@ -1,14 +1,11 @@
 package com.company.Personale;
 
-import com.company.DatabaseConnectionManager;
-import com.company.GateRepository;
-import com.company.Plane;
-import com.company.PlaneRepository;
+import com.company.Repository.DatabaseConnectionManager;
+import com.company.Repository.GateRepository;
+import com.company.Repository.PlaneRepository;
 
-import javax.xml.parsers.ParserConfigurationException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class TaxiRepository {
