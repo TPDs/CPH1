@@ -7,7 +7,7 @@ public class Client {
 
 
     public void client(String user) {
-        String serverName = "10.111.176.139"; // Dagens lokal ip på skolen.. TJEK MIG!
+        String serverName = "10.111.179.239"; // Dagens lokal ip på skolen.. TJEK MIG!
         int port = 48880;
 
 

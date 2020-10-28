@@ -2,29 +2,29 @@ package com.company.Util;
 
 import com.company.Gate;
 import com.company.GateRepository;
-import com.company.Plane;
 import com.company.PlaneRepository;
-
 import java.io.*;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
-import java.util.List;
 
-public class Server extends Thread{
+
+public class Server extends Thread {
     private ServerSocket serverSocket;
 
-    public Server (int port) throws IOException {
-       String host = "10.111.176.147"; // Dagens lokal ip på skolen.. TJEK MIG!
+    public Server(int port) throws IOException {
+        System.out.println("Test");
+        String host = "10.111.179.239"; // Dagens lokal ip på skolen.. TJEK MIG!
 
         InetAddress address = InetAddress.getByName(host);
-        serverSocket = new ServerSocket(port,1000000,address);
+        serverSocket = new ServerSocket(port, 1000000, address);
         //serverSocket.setSoTimeout(100000);
+
     }
 
     public void run() {
-        while (true){
+        while (true) {
             try {
                 System.out.println("Tårn is Live on ip: " + serverSocket.getLocalPort());
                 Socket server = serverSocket.accept();
@@ -38,28 +38,24 @@ public class Server extends Thread{
                 int planID = planeRepository.findPlaneIdFromRutenNr(rute);
                 Gate lok = gate.findPlaneIDInGates(planID);
                 out.writeUTF("Du er på plads " + lok.getIdGate());
-                out.writeUTF("I hear you " + user + " :" + rute + " Dit iD er " +planID);
-                towerCommand(out,in);
-               server.close();
+                out.writeUTF("I hear you " + user + " :" + rute + " Dit iD er " + planID);
+                towerCommand(out, in);
+                server.close();
 
 
-            }
-            catch (SocketTimeoutException s) {
+            } catch (SocketTimeoutException s) {
                 System.out.println("Connection timed out");
                 break;
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
                 break;
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
+            } 
 
         }
 
     }
 
-    public void towerCommand(DataOutputStream out, DataInputStream in) throws IOException, ClassNotFoundException {
+    public void towerCommand(DataOutputStream out, DataInputStream in) throws IOException {
         boolean flag = true;
         System.out.println("TowerCommand loaded...");
 
@@ -88,7 +84,6 @@ public class Server extends Thread{
         }
 
     }
-
 
 
 }
