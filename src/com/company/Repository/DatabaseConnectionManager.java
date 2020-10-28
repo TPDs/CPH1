@@ -1,4 +1,4 @@
-package com.company;
+package com.company.Repository;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

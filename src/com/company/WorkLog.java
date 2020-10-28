@@ -26,7 +26,7 @@ public class WorkLog {
     public void setLocation(String location) {
         this.location = location;
     }
-    //------------------------------------get---------------------------------------------------------.
+    //------------------------------------get-----------------------------------------------------------
 
     public int getPersonale_id() {
         return Personale_id;

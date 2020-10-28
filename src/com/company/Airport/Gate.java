@@ -1,4 +1,4 @@
-package com.company;
+package com.company.Airport;
 
 public class Gate extends Finger {
 
@@ -68,6 +68,6 @@ public class Gate extends Finger {
 
     @Override
     public String toString() {
-        return "Gate" + idGate + " on the " + side + " side of finger " + 1;
+        return "Gate" + idGate + " on the " + side + " side of finger " + idFinger;
     }
 }

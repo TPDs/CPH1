@@ -1,16 +1,10 @@
 package com.company;
 
-import com.company.Personale.Job;
-import com.company.Personale.Personale;
+import com.company.Repository.DatabaseConnectionManager;
 import com.company.Util.Client;
 import com.company.Util.Server;
 
 import java.io.IOException;
-import java.sql.Array;
-import java.sql.Connection;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Scanner;
 
 public class Main {

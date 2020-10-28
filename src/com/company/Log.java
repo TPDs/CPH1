@@ -1,11 +1,11 @@
 package com.company;
 
-import javax.xml.crypto.Data;
+import com.company.AirPlane.Plane;
+import com.company.Repository.DatabaseConnectionManager;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.*;
-import java.util.Collection;
 
 public class Log {
 
@@ -44,7 +44,10 @@ public class Log {
             PreparedStatement passIn = conn.prepareStatement(sql);
             desc = "All passengers for flight " + plane.getId() + " have boardet the flight";
 
-            passIn.setString(1, desc);
+            passIn.setInt(1, plane.getId());
+            passIn.setString(2, "Passengers In");
+            passIn.setString(3, "Pending");
+            //passOut....time(4, time.getTime() + plane.getSize());
 
             int insertedRows = passIn.executeUpdate();
             if(insertedRows > 0){
@@ -60,12 +63,15 @@ public class Log {
 
     public boolean bagageOff(Plane plane){
         Connection conn = DatabaseConnectionManager.getDatabaseConnection();
-        sql = "INSERT INTO worklog(Personale_id, task, starttime, endtime) VALUES(?, 'Bagage Off', ?, ?)";
+        sql = "INSERT INTO FlyEventList(Planelist_idPlane, task, Status, Time) VALUES(?, ?, ?, ?)";
         try{
             PreparedStatement bagOff = conn.prepareStatement(sql);
             desc = "Bagage from flight " + plane.getId() + " have been taken out";
 
-            bagOff.setString(1, desc);
+            bagOff.setInt(1, plane.getId());
+            bagOff.setString(2, "Bagage off");
+            bagOff.setString(3, "Pending");
+            //passOut....time(4, time.getTime() + plane.getSize());
 
             int insertedRows = bagOff.executeUpdate();
             if(insertedRows > 0){
@@ -81,12 +87,15 @@ public class Log {
 
     public boolean bagageOn(Plane plane){
         Connection conn = DatabaseConnectionManager.getDatabaseConnection();
-        sql = "INSERT INTO worklog(Personale_id, task, starttime, endtime) VALUES(?, 'Bagage on', ?, ?)";
+        sql = "INSERT INTO FlyEventList(Planelist_idPlane, task, Status, Time) VALUES(?, ?, ?, ?)";
         try{
             PreparedStatement bagOn = conn.prepareStatement(sql);
             desc = "Bagage have been loaded on flight " + plane.getId();
 
-            bagOn.setString(1, desc);
+            bagOn.setInt(1, plane.getId());
+            bagOn.setString(2, "Bagage on");
+            bagOn.setString(3, "Pending");
+            //passOut....time(4, time.getTime() + plane.getSize());
 
             int insertedRows = bagOn.executeUpdate();
             if(insertedRows > 0){
@@ -102,12 +111,15 @@ public class Log {
 
     public boolean fuelOnPlane(Plane plane){
         Connection conn = DatabaseConnectionManager.getDatabaseConnection();
-        sql = "INSERT INTO worklog(Personale_id, task, starttime, endtime) VALUES(?, 'Fuel on', ?, ?)";
+        sql = "INSERT INTO FlyEventList(Planelist_idPlane, task, Status, Time) VALUES(?, ?, ?, ?)";
         try{
             PreparedStatement fuelOn = conn.prepareStatement(sql);
             desc = "Flight " + plane.getId() + " have been refueled";
 
-            fuelOn.setString(1, desc);
+            fuelOn.setInt(1, plane.getId());
+            fuelOn.setString(2, "Fuel on");
+            fuelOn.setString(3, "Pending");
+            //passOut....time(4, time.getTime() + plane.getSize());
 
             int insertedRows = fuelOn.executeUpdate();
             if(insertedRows > 0){
@@ -123,12 +135,16 @@ public class Log {
 
     public boolean planeCleanedLog(Plane plane){
         Connection conn = DatabaseConnectionManager.getDatabaseConnection();
-        sql = "INSERT INTO worklog(Personale_id, task, starttime, endtime) VALUES(?, 'Plane cleaned', ?, ?)";
+        sql = "INSERT INTO FlyEventList(Planelist_idPlane, task, Status, Time) VALUES(?, ?, ?, ?)";
         try {
             PreparedStatement planeClean = conn.prepareStatement(sql);
             desc = "Plane " + plane.getId() + " have been cleaned";
 
-            planeClean.setString(1, desc);
+            planeClean.setInt(1, plane.getId());
+            planeClean.setString(2, "Plane cleaned");
+            planeClean.setString(3, "Finished");
+            //passOut....time(4, time.getTime() + plane.getSize());
+
             int insertedRows = planeClean.executeUpdate();
             if(insertedRows > 0){
                 System.out.println("Log successfully created (Plane cleaned)!");

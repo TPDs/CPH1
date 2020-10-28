@@ -1,6 +1,4 @@
-package com.company;
-
-import java.util.ArrayList;
+package com.company.Airport;
 
 public class Finger extends Terminal{
     Gate gate;

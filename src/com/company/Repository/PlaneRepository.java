@@ -1,12 +1,11 @@
-package com.company;
+package com.company.Repository;
 
-import com.company.Personale.Job;
+import com.company.AirPlane.Plane;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Random;
 
