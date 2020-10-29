@@ -16,7 +16,7 @@ public class Server extends Thread {
     private ServerSocket serverSocket;
 
     public Server(int port) throws IOException {
-        System.out.println("Test");
+
         String host = "10.111.179.239"; // Dagens lokal ip på skolen.. TJEK MIG!
 
         InetAddress address = InetAddress.getByName(host);
